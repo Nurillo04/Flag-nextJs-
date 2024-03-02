@@ -1,10 +1,47 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Link from "next/link";
+import useCounter from "../counter/countres";
+// import Image from "next/image";
 
 const HomePages = () => {
+  const { getIdVal, idval } = useCounter();
+  let [datas, setDatas] = useState<
+    {
+      id: number;
+      imgUrl: string;
+      name: string;
+      ppulation: string;
+      region: string;
+      capitals: string;
+      currons: string;
+    }[]
+  >([]);
+
+  let axiosdata = async () => {
+    try {
+      let res = await axios.get("http://localhost:3000/counters");
+      let data = await res.data;
+      setDatas(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  let func = (id: number) => {
+    getIdVal(id);
+  };
+
+  useEffect(() => {
+    axiosdata();
+    console.log(idval);
+  }, []);
+
   return (
-    <div className="xl:pl-20 xl:pr-20 md:pl-2 md:pr-2 pl-2 pr-2 ">
-      <div className="container ">
+    <div className="w-full xl:pl-20 xl:pr-20 md:pl-2 md:pr-2 pl-2 pr-2 ">
+      <div className="container w-full ">
         <div className="flex flex-wrap justify-between items-baseline">
           <input
             type="search"
@@ -20,77 +57,42 @@ const HomePages = () => {
             <option value="europe">Europe</option>
           </select>
         </div>
-        <ul className="mt-28 flex flex-wrap justify-between items-baseline">
-          <li>
-            <Image src="/germany.png" alt="Hello " width={264} height={164} />
-            <div>
-              <h3 className="mt-6 mb-4 font-bold text-2xl"> Germany</h3>
-              <p className="font-semibold text-base">
-                Population:{" "}
-                <span className="text-slate-400 ml-2">81,770,900</span>
-              </p>
-              <p className="font-semibold text-base">
-                Region: <span className="text-slate-400 ml-2">Europe</span>
-              </p>
-              <p className="font-semibold text-base">
-                Capital: <span className="text-slate-400 ml-2">Berlin</span>
-              </p>
-            </div>
-          </li>
-          <li>
-            <Image src="/amerika.png" alt="Hello " width={264} height={164} />
-            <div>
-              <h3 className="mt-6 mb-4 font-bold text-2xl">
-                {" "}
-                United States of America
-              </h3>
-              <p className="font-semibold text-base">
-                Population:{" "}
-                <span className="text-slate-400 ml-2">323,947,000</span>
-              </p>
-              <p className="font-semibold text-base">
-                Region: <span className="text-slate-400 ml-2"> Americas</span>
-              </p>
-              <p className="font-semibold text-base">
-                Capital:{" "}
-                <span className="text-slate-400 ml-2">Washington, D.C.</span>
-              </p>
-            </div>
-          </li>
-          <li>
-            <Image src="/germany.png" alt="Hello " width={264} height={164} />
-            <div>
-              <h3 className="mt-6 mb-4 font-bold text-2xl"> Germany</h3>
-              <p className="font-semibold text-base">
-                Population:{" "}
-                <span className="text-slate-400 ml-2">81,770,900</span>
-              </p>
-              <p className="font-semibold text-base">
-                Region: <span className="text-slate-400 ml-2">Europe</span>
-              </p>
-              <p className="font-semibold text-base">
-                Capital: <span className="text-slate-400 ml-2">Berlin</span>
-              </p>
-            </div>
-          </li>
 
-          <li>
-            <Image src="/germany.png" alt="Hello " width={264} height={164} />
-            <div>
-              <h3 className="mt-6 mb-4 font-bold text-2xl"> Germany</h3>
-              <p className="font-semibold text-base">
-                Population:{" "}
-                <span className="text-slate-400 ml-2">81,770,900</span>
-              </p>
-              <p className="font-semibold text-base">
-                Region: <span className="text-slate-400 ml-2">Europe</span>
-              </p>
-              <p className="font-semibold text-base">
-                Capital: <span className="text-slate-400 ml-2">Berlin</span>
-              </p>
+        <section className="w-full mt-[48px]">
+          <div className="container">
+            <div className="w-full flex flex-wrap gap-[70px]">
+              {datas.map((e, i) => (
+                <Link
+                  onClick={() => func(e.id)}
+                  href="#"
+                  className="w-[264px] flex flex-col cursor-grabbing"
+                  key={i}
+                >
+                  <img
+                    className="w-[264px] h-[160px] rounded-md"
+                    src={e.imgUrl}
+                    alt="alt"
+                  />
+                  <div className="w-full p-[24px] bg-[#2B3844]">
+                    <h2 className="text-[18px] mb-[16px]">{e.name}</h2>
+                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                      <p className="text-[#FFFFFF] text-[14px]">Population:</p>
+                      {e.ppulation}
+                    </p>
+                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                      <p className="text-[#FFFFFF] text-[14px]">Region:</p>
+                      {e.region}
+                    </p>
+                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                      <p className="text-[#FFFFFF] text-[14px]">Capital:</p>
+                      {e.capitals}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          </li>
-        </ul>
+          </div>
+        </section>
       </div>
     </div>
   );
