@@ -36,7 +36,7 @@ const HomePages: React.FC = () => {
 
   useEffect(() => {
     axiosdata();
-    console.log(idval);
+    // console.log(idval);
   }, []);
 
   return (
