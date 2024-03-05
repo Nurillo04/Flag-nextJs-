@@ -4,33 +4,33 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import useCounter from "../counter/countres";
-// import Image from "next/image";
 
-const HomePages = () => {
+interface Data {
+  id: number;
+  imgUrl: string;
+  name: string;
+  population: string; // Corrected property name
+  region: string;
+  capitals: string;
+  currencies: string; // Corrected property name
+}
+
+const HomePages: React.FC = () => {
   const { getIdVal, idval } = useCounter();
-  let [datas, setDatas] = useState<
-    {
-      id: number;
-      imgUrl: string;
-      name: string;
-      ppulation: string;
-      region: string;
-      capitals: string;
-      currons: string;
-    }[]
-  >([]);
+  const [datas, setDatas] = useState<Data[]>([]);
+  const [searchText, setSearchText] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("all");
 
-  let axiosdata = async () => {
+  const axiosdata = async () => {
     try {
-      let res = await axios.get("http://localhost:3000/counters");
-      let data = await res.data;
-      setDatas(data);
+      const res = await axios.get<Data[]>("http://localhost:3000/counters");
+      setDatas(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  let func = (id: number) => {
+  const func = (id: number) => {
     getIdVal(id);
   };
 
@@ -47,8 +47,16 @@ const HomePages = () => {
             type="search"
             placeholder="Searching..."
             className="w-80  md:w-96 p-4 rounded-lg"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
-          <select name="all" id="all" className="mt-5 p-3 rounded-lg">
+          <select
+            name="all"
+            id="all"
+            className="mt-5 p-3 rounded-lg"
+            onChange={(e) => setSelectedRegion(e.target.value)}
+            value={selectedRegion}
+          >
             <option value="all">Filter by Region</option>
             <option value="oceania">Oceania</option>
             <option value="america">America</option>
@@ -60,36 +68,47 @@ const HomePages = () => {
 
         <section className="w-full mt-[48px]">
           <div className="container">
-            <div className="w-full flex flex-wrap gap-[70px]">
-              {datas.map((e, i) => (
-                <Link
-                  onClick={() => func(e.id)}
-                  href="#"
-                  className="w-[264px] flex flex-col cursor-grabbing"
-                  key={i}
-                >
-                  <img
-                    className="w-[264px] h-[160px] rounded-md"
-                    src={e.imgUrl}
-                    alt="alt"
-                  />
-                  <div className="w-full p-[24px] bg-[#2B3844]">
-                    <h2 className="text-[18px] mb-[16px]">{e.name}</h2>
-                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
-                      <p className="text-[#FFFFFF] text-[14px]">Population:</p>
-                      {e.ppulation}
-                    </p>
-                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
-                      <p className="text-[#FFFFFF] text-[14px]">Region:</p>
-                      {e.region}
-                    </p>
-                    <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
-                      <p className="text-[#FFFFFF] text-[14px]">Capital:</p>
-                      {e.capitals}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+            <div className="w-full flex flex-wrap gap-[70px] bg-inherit">
+              {datas
+                .filter((item) =>
+                  item.name.toLowerCase().includes(searchText.toLowerCase())
+                )
+                .filter((item) =>
+                  selectedRegion === "all"
+                    ? true
+                    : item.region === selectedRegion
+                )
+                .map((e, i) => (
+                  <Link
+                    onClick={() => func(e.id)}
+                    href="/detail"
+                    className="w-[264px] flex flex-col cursor-grabbing"
+                    key={i}
+                  >
+                    <img
+                      className="w-[264px] h-[160px] rounded-md"
+                      src={e.imgUrl}
+                      alt="alt"
+                    />
+                    <div className="w-full p-[24px] bg-[#2B3844]">
+                      <h2 className="text-[18px] mb-[16px]">{e.name}</h2>
+                      <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                        <p className="text-[#FFFFFF] text-[14px]">
+                          Population:
+                        </p>
+                        {e.population}
+                      </p>
+                      <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                        <p className="text-[#FFFFFF] text-[14px]">Region:</p>
+                        {e.region}
+                      </p>
+                      <p className="text-[12px] flex mb-[8px] items-center gap-x-2 text-slate-500">
+                        <p className="text-[#FFFFFF] text-[14px]">Capital:</p>
+                        {e.capitals}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
             </div>
           </div>
         </section>
