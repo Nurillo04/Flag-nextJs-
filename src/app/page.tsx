@@ -9,10 +9,10 @@ interface Data {
   id: number;
   imgUrl: string;
   name: string;
-  population: string; // Corrected property name
+  population: string;
   region: string;
   capitals: string;
-  currencies: string; // Corrected property name
+  currencies: string;
 }
 
 const HomePages: React.FC = () => {
@@ -58,11 +58,12 @@ const HomePages: React.FC = () => {
             value={selectedRegion}
           >
             <option value="all">Filter by Region</option>
-            <option value="oceania">Oceania</option>
-            <option value="america">America</option>
-            <option value="asia">Asia</option>
-            <option value="africa">Africa</option>
-            <option value="europe">Europe</option>
+
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Africa">Africa</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
           </select>
         </div>
 

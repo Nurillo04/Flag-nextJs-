@@ -4,7 +4,7 @@
       "id": 1,
       "imgUrl": "https://flagcdn.com/w320/vc.png",
       "name": "Saint Vincent and the Grenadines",
-      "ppulation": "110947",
+      "population": "110947",
       "region": "Americas",
       "capitals": "Kingstown",
       "currons": "Euro"
@@ -13,7 +13,7 @@
       "id": 2,
       "imgUrl": "https://flagcdn.com/w320/ss.png",
       "name": "South Sudan",
-      "ppulation": "11193729",
+      "population": "11193729",
       "region": "Africa",
       "capitals": "Juba",
       "currons": "Africa"
@@ -22,7 +22,7 @@
       "id": 3,
       "imgUrl": "https://cdn.britannica.com/47/6847-004-7D668BB0/Flag-Brazil.jpg",
       "name": "Brazil",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Europe",
       "capitals": "Braziliya",
       "currons": "Europe"
@@ -31,7 +31,7 @@
       "id": 4,
       "imgUrl": "https://flagcdn.com/w320/va.png",
       "name": "Cook Islands",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Europe",
       "capitals": "Berlin",
       "currons": "Euro"
@@ -40,7 +40,7 @@
       "id": 5,
       "imgUrl": "https://flagcdn.com/w320/zm.png",
       "name": "Zambia",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Africa",
       "capitals": "Berlin",
       "currons": "Africa"
@@ -49,7 +49,7 @@
       "id": 6,
       "imgUrl": "https://flagcdn.com/w320/tm.png",
       "name": "Turkmenistan",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Asia",
       "capitals": "Berlin",
       "currons": "Euro"
@@ -58,7 +58,7 @@
       "id": 7,
       "imgUrl": "https://flagcdn.com/w320/hr.png",
       "name": "Croatia",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Europe",
       "capitals": "Berlin",
       "currons": "Euro"
@@ -67,7 +67,7 @@
       "id": 8,
       "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Iceland_%281918%E2%80%931944%29.svg/200px-Flag_of_Iceland_%281918%E2%80%931944%29.svg.png",
       "name": "German",
-      "ppulation": " 81,770,900",
+      "population": " 81,770,900",
       "region": "Africa",
       "capitals": "Berlin",
       "currons": "Africa"
@@ -76,7 +76,7 @@
       "id": 9,
       "imgUrl": "https://flagcdn.com/w320/jp.png",
       "name": "Japan",
-      "ppulation": "  125836021",
+      "population": "  125836021",
       "region": "Asia",
       "capitals": "Tokyo",
       "currons": "Asia"
